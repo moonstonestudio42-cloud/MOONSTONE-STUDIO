@@ -1,1 +1,93 @@
+:root {
+    --cream: #f5f0e8;
+    --blush: #e8d5c4;
+    --mocha: #7a5c4a;
+    --stone: #9b8b7e;
+    --deep: #2e1f17;
+    --gold: #c9a96e;
+    --rose: #c0897a;
+    --sage: #8fa08b;
+    --ivory: #faf7f2;
+    --smoke: #e4ddd5;
+}
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Jost', sans-serif;
+    background: var(--ivory);
+    color: var(--deep);
+    overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+    ...
+}
+
+/* HERO */
+.hero {
+    ...
+}
+
+/* ABOUT */
+.about {
+    ...
+}
+
+/* SERVICES */
+.services {
+    ...
+}
+
+/* PACKAGES */
+.packages {
+    ...
+}
+
+/* GALLERY */
+.g-cell {
+    ...
+}
+
+/* TESTIMONIALS */
+.testimonials {
+    ...
+}
+
+/* BOOKING */
+.booking {
+    ...
+}
+
+/* FOOTER */
+footer {
+    ...
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+    ...
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    ...
+}
+
+/* TOAST */
+.toast {
+    ...
+}
+
+.toast.show {
+    ...
+}

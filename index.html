@@ -370,9 +370,9 @@ $$('.nav-links a').forEach(a=>a.addEventListener('click',()=>$('#navLinks').clas
 // Toast
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000)}
 // ===== GOOGLE SHEET SETTINGS: paste your Apps Script web app URLs between the quotes =====
-const APPOINTMENT_SHEET_URL = "https://script.google.com/macros/s/AKfycbypy0377Xmz0F6rREM7fFRKqzqOqJMmFzJqyYAlTEmLbdllCBFWhKnVfH7REKGjrigK/exec";  // sheet for appointment requests
+const APPOINTMENT_SHEET_URL = "https://script.google.com/macros/s/AKfycbxMl4_a-EsuY0egxUrTms3r4BGoSOatUDwxIuZ2qzaQEJ1cNY3vp_w_sB5NWpbxLPcb/exec";  // sheet for appointment requests
 const CLASS_SHEET_URL = "";        // sheet for class registrations
-// (both can be the same URL; leave empty to send via WhatsApp instead)
+// (both can be the same URL; leave empty to send via WhatsApp instead)https://script.google.com/macros/s/AKfycbxMl4_a-EsuY0egxUrTms3r4BGoSOatUDwxIuZ2qzaQEJ1cNY3vp_w_sB5NWpbxLPcb/exec
 // =========================================================================================
 function submitForm(id,title){
   const f=$('#'+id),isClass=id==='classForm';

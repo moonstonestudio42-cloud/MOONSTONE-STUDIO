@@ -125,3 +125,120 @@ lightbox.addEventListener('click', (e) => {
         lightbox.classList.remove('active');
     }
 });
+
+function submitForm(id, title) {
+
+  const f = document.getElementById(id);
+  const isClass = id === "classForm";
+  const url = isClass ? CLASS_SHEET_URL : APPOINTMENT_SHEET_URL;
+
+  let ok = true;
+
+  const data = {
+    formType: title
+  };
+
+  const lines = [];
+
+  f.querySelectorAll("input, select, textarea").forEach(el => {
+
+    const label = el.closest(".fg").querySelector("label").textContent.trim();
+    const value = el.value.trim();
+
+    const optional = ["nt", "em", "ag"].includes(el.name);
+
+    if (!value && !optional) {
+      ok = false;
+      el.style.borderColor = "#c0897a";
+    } else {
+      el.style.borderColor = "";
+    }
+
+    if (isClass) {
+
+      if (el.name === "nm") data.fullName = value;
+      if (el.name === "ph") data.phone = value;
+      if (el.name === "em") data.email = value;
+      if (el.name === "ag") data.age = value;
+      if (el.name === "co") data.course = value;
+      if (el.name === "lv") data.experienceLevel = value;
+      if (el.name === "bt") data.preferredBatch = value;
+      if (el.name === "sd") data.preferredStartDate = value;
+      if (el.name === "nt") data.message = value;
+
+    } else {
+
+      if (el.name === "fn") data.firstName = value;
+      if (el.name === "ln") data.lastName = value;
+      if (el.name === "ph") data.phone = value;
+      if (el.name === "sv") data.service = value;
+      if (el.name === "dt") data.preferredDate = value;
+      if (el.name === "tm") data.preferredTime = value;
+      if (el.name === "nt") data.specialRequest = value;
+    }
+
+    if (value) {
+      lines.push(label + ": " + value);
+    }
+
+  });
+
+  if (!ok) {
+    toast("Please fill in all required fields");
+    return;
+  }
+
+  if (!url) {
+    window.open(
+      "https://wa.me/917358282937?text=" +
+      encodeURIComponent(
+        "*" + title + " - Moonstone Studio*\n" +
+        lines.join("\n")
+      ),
+      "_blank"
+    );
+
+    toast("✦ " + title + " received — we'll confirm shortly!");
+
+    f.querySelectorAll("input, select, textarea").forEach(el => {
+      el.value = "";
+    });
+
+    return;
+  }
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(result => {
+
+    console.log("Google Sheet response:", result);
+
+    if (result.success) {
+
+      toast("✦ " + title + " received — we'll confirm shortly!");
+
+      f.querySelectorAll("input, select, textarea").forEach(el => {
+        el.value = "";
+      });
+
+    } else {
+
+      toast("Something went wrong: " + result.message);
+      console.error(result);
+
+    }
+
+  })
+  .catch(error => {
+
+    console.error("Google Sheet Error:", error);
+    toast("Unable to submit. Please try again.");
+
+  });
+}

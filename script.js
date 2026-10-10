@@ -4,7 +4,7 @@
   /* ===== SETTINGS ===== */
   // Google Apps Script web-app URLs. Leave a URL empty ("") to send that form via WhatsApp instead.
   var APPOINTMENT_SHEET_URL = "https://script.google.com/macros/s/AKfycbyaCBM-VfUtRKhMTU-ke6RcU2ZihB6iNhEcJ3tJQf31Qt8anmnzAWztRx0awk29NBPt/exec";
-  var CLASS_SHEET_URL       = "https://script.google.com/macros/s/AKfycbx7GCpxcrvczXdQd4lCeooPiRIEnzv1yZGU_bDPk7__NqydW_5pVU0ikQIvorUuvHfl/exec";
+  var CLASS_SHEET_URL       = "https://script.google.com/macros/s/AKfycbylUUcApf51cN9005GXwu5X9G8hA-Bnr1lZB54ogWn29bRdKf2b50SELPTeBsaOeFqd/exec";
   var WHATSAPP_NUMBER       = "917358282937";
   /* ==================== */
 

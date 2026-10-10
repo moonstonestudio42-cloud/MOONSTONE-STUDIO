@@ -388,7 +388,21 @@ function submitForm(id,title){
   if(!ok){toast('Please fill in all required fields');return}
   const done=()=>{toast('✦ '+title+' received — we\'ll confirm shortly!');f.querySelectorAll('input,select,textarea').forEach(el=>el.value='')};
   if(!url){window.open('https://wa.me/917358282937?text='+encodeURIComponent('*'+title+' - Moonstone Studio*\n'+lines.join('\n')),'_blank');done();return}
-  fetch(url,{method:'POST',mode:'no-cors',body:data}).then(done).catch(()=>toast('Something went wrong. Please call us.'));
+  fetch("YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    firstName: firstName,
+    lastName: lastName,
+    phone: phone,
+    service: service,
+    preferredDate: preferredDate,
+    preferredTime: preferredTime,
+    specialRequest: specialRequest
+  })
+});
 }
 </script>
 </body>

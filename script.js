@@ -136,14 +136,18 @@
         return res.text();
       })
       .then(function (text) {
+        console.log('Sheet reply:', text);
         var result = null;
-        try { result = JSON.parse(text); } catch (e) { /* non-JSON reply still counts as delivered */ }
-        if (result && result.success === false) throw new Error(result.message || 'Rejected by sheet');
+        try { result = JSON.parse(text); } catch (e) { /* not JSON */ }
+        // Only count it as saved when the script itself says so
+        if (!result || result.success !== true) {
+          throw new Error(result && result.message ? result.message : 'Unexpected reply from sheet');
+        }
         success();
       })
       .catch(function (err) {
         console.error('Form submit error:', err);
-        toast('Could not send online. Opening WhatsApp instead...');
+        toast('Not saved to sheet (' + err.message + '). Opening WhatsApp...');
         sendWhatsApp(title, lines);
       })
       .then(function () {

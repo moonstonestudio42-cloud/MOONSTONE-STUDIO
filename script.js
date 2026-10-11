@@ -3,8 +3,8 @@
 
   /* ===== SETTINGS ===== */
   // Google Apps Script web-app URLs (must end with /exec).
-  var APPOINTMENT_SHEET_URL = "https://script.google.com/macros/s/AKfycby8tR0MSKfgoePx3TRHNZe4yZKAxEd4sPgtscMOUX9JGCTWA2Lv31LIjXcdWBFT1OFX/exec";
-  var CLASS_SHEET_URL       = "https://script.google.com/macros/s/AKfycbz5cGGl3llNzj6SRMU6M1Ml8pZWPbgL-o1F5G3oU0gFgsaHiF-V8x7CzldXrgvb4f--/exec";
+  var APPOINTMENT_SHEET_URL = "https://script.google.com/macros/s/AKfycbw8KpveLf_VIg9WxVUu1J8Qyy2MHxlYAHQZjMVEFZykLZS14swinOhs-z9-rbOcQqy7/exec";
+  var CLASS_SHEET_URL       = "https://script.google.com/macros/s/AKfycbwcQtMeB-es01z8D22FwwXthu7AAhbqiyHtQEKyOs2fx0dXKict5Yif4T7Mu3MPjVnzYw/exec";
   // Set to true while testing to see the real error message in the toast.
   var DEBUG = true;
   /* ==================== */

@@ -3,11 +3,10 @@
 
   /* ===== SETTINGS ===== */
   // Google Apps Script web-app URLs (must end with /exec).
-  var APPOINTMENT_SHEET_URL = "https://script.google.com/macros/s/AKfycbxz-7gxgZllWhBsuZriiiEc9O4Vuw9MJd2xYLTx8ZhHKmpx_CLYhGqasQa-j806jFl9/exec";
-  var CLASS_SHEET_URL       = "https://script.google.com/macros/s/AKfycbxz-7gxgZllWhBsuZriiiEc9O4Vuw9MJd2xYLTx8ZhHKmpx_CLYhGqasQa-j806jFl9/exec";
-  var WHATSAPP_NUMBER       = "917358282937";
+  var APPOINTMENT_SHEET_URL = "https://script.google.com/macros/s/AKfycby8tR0MSKfgoePx3TRHNZe4yZKAxEd4sPgtscMOUX9JGCTWA2Lv31LIjXcdWBFT1OFX/exec";
+  var CLASS_SHEET_URL       = "https://script.google.com/macros/s/AKfycbz5cGGl3llNzj6SRMU6M1Ml8pZWPbgL-o1F5G3oU0gFgsaHiF-V8x7CzldXrgvb4f--/exec";
   // Set to true while testing to see the real error message in the toast.
-  var DEBUG = false;
+  var DEBUG = true;
   /* ==================== */
 
   var $  = function (s) { return document.querySelector(s); };
@@ -83,23 +82,15 @@
     form.querySelectorAll('select').forEach(function (el) { el.selectedIndex = 0; });
   }
 
-  // Only used if a sheet URL is left empty
-  function sendWhatsApp(title, lines) {
-    var text = '*' + title + ' - Moonstone Studio*\n' + lines.join('\n');
-    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
-  }
-
   function submitForm(id, title, btn) {
     var form = document.getElementById(id);
     var isClass = id === 'classForm';
     var url = isClass ? CLASS_SHEET_URL : APPOINTMENT_SHEET_URL;
     var map = FIELD_MAP[id];
     var data = { formType: title };
-    var lines = [];
     var ok = true, firstBad = null, message = 'Please fill in all required fields';
 
     form.querySelectorAll('input,select,textarea').forEach(function (el) {
-      var label = el.closest('.fg').querySelector('label').textContent.replace(/\s*\(optional\)/, '').trim();
       var value = el.value.trim();
       var bad = !value && OPTIONAL.indexOf(el.name) === -1;
 
@@ -111,7 +102,6 @@
       if (bad) { ok = false; if (!firstBad) firstBad = el; }
 
       data[map[el.name]] = value;
-      if (value) lines.push(label + ': ' + value);
     });
 
     if (!ok) { toast(message); if (firstBad) firstBad.focus(); return; }
@@ -121,8 +111,7 @@
       clearForm(form);
     };
 
-    // No sheet URL set: send via WhatsApp
-    if (!url) { sendWhatsApp(title, lines); success(); return; }
+    if (!url) { toast('Sheet URL is missing in script.js'); return; }
 
     var btnText = btn.textContent;
     btn.disabled = true;

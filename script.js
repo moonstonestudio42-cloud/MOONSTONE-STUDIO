@@ -3,8 +3,8 @@
 
   /* ===== SETTINGS ===== */
   // Google Apps Script web-app URLs (must end with /exec).
-  var APPOINTMENT_SHEET_URL = "https://script.google.com/macros/s/AKfycby8tR0MSKfgoePx3TRHNZe4yZKAxEd4sPgtscMOUX9JGCTWA2Lv31LIjXcdWBFT1OFX/exec";
-  var CLASS_SHEET_URL       = "https://script.google.com/macros/s/AKfycbz5cGGl3llNzj6SRMU6M1Ml8pZWPbgL-o1F5G3oU0gFgsaHiF-V8x7CzldXrgvb4f--/exec";
+  var APPOINTMENT_SHEET_URL = "https://script.google.com/macros/s/AKfycbxz-7gxgZllWhBsuZriiiEc9O4Vuw9MJd2xYLTx8ZhHKmpx_CLYhGqasQa-j806jFl9/exec";
+  var CLASS_SHEET_URL       = "https://script.google.com/macros/s/AKfycbxz-7gxgZllWhBsuZriiiEc9O4Vuw9MJd2xYLTx8ZhHKmpx_CLYhGqasQa-j806jFl9/exec";
   var WHATSAPP_NUMBER       = "917358282937";
   // Set to true while testing to see the real error message in the toast.
   var DEBUG = false;

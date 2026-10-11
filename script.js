@@ -2,10 +2,12 @@
   'use strict';
 
   /* ===== SETTINGS ===== */
-  // Google Apps Script web-app URLs. Leave a URL empty ("") to send that form via WhatsApp instead.
+  // Google Apps Script web-app URLs (must end with /exec).
   var APPOINTMENT_SHEET_URL = "https://script.google.com/macros/s/AKfycby8tR0MSKfgoePx3TRHNZe4yZKAxEd4sPgtscMOUX9JGCTWA2Lv31LIjXcdWBFT1OFX/exec";
   var CLASS_SHEET_URL       = "https://script.google.com/macros/s/AKfycbz5cGGl3llNzj6SRMU6M1Ml8pZWPbgL-o1F5G3oU0gFgsaHiF-V8x7CzldXrgvb4f--/exec";
   var WHATSAPP_NUMBER       = "917358282937";
+  // Set to true while testing to see the real error message in the toast.
+  var DEBUG = false;
   /* ==================== */
 
   var $  = function (s) { return document.querySelector(s); };
@@ -81,6 +83,7 @@
     form.querySelectorAll('select').forEach(function (el) { el.selectedIndex = 0; });
   }
 
+  // Only used if a sheet URL is left empty
   function sendWhatsApp(title, lines) {
     var text = '*' + title + ' - Moonstone Studio*\n' + lines.join('\n');
     window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
@@ -121,7 +124,7 @@
     // No sheet URL set: send via WhatsApp
     if (!url) { sendWhatsApp(title, lines); success(); return; }
 
-    var label = btn.textContent;
+    var btnText = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Sending...';
 
@@ -147,12 +150,12 @@
       })
       .catch(function (err) {
         console.error('Form submit error:', err);
-        toast('Not saved to sheet (' + err.message + '). Opening WhatsApp...');
-        sendWhatsApp(title, lines);
+        // Form is NOT cleared, so the customer can try again
+        toast(DEBUG ? 'Not saved: ' + err.message : 'Could not save. Please try again or call us.');
       })
       .then(function () {
         btn.disabled = false;
-        btn.textContent = label;
+        btn.textContent = btnText;
       });
   }
 
